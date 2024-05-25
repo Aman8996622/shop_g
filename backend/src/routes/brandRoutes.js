@@ -5,29 +5,17 @@ const app = express();
 const setUploadPath = require("../middleware/upload_middleware");
 const verifyToken = require("../utils/verify_token");
 
-const {addBrand}  = require("../controller/brandController");
-
+const { addBrand } = require("../controller/brandController");
 
 const routes = express.Router();
-
 
 routes.post(
   "/add_brand",
   verifyToken.verifyToken,
   setUploadPath.setUploadPath("./public/images/brand"),
   upload.single("brandImage"),
-  addBrand,
-
+  addBrand
 );
-
-
-
-
-
-
-
-
-
 
 module.exports = {
   brandRoutes: routes,

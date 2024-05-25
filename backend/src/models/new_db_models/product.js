@@ -4,19 +4,18 @@ const { type } = require("os");
 const { Schema } = mongoose;
 
 const yourModelSchema = new Schema({
-  
   id: {
     type: String,
     default: "",
   },
   name: {
-    type: String, 
+    type: String,
     unique: true,
-    default: "", 
+    default: "",
   },
   description: {
     type: String,
-    unique:true,
+    unique: true,
     default: "",
   },
   mrp: {
@@ -35,13 +34,13 @@ const yourModelSchema = new Schema({
     type: Number,
     default: 1,
   },
-  color :{
-      type : Array,
-      default:  []
+  color: {
+    type: Array,
+    default: [],
   },
-  size:{
-     type:Array,
-     default:[]
+  size: {
+    type: Array,
+    default: [],
   },
   images: {
     type: Array,
@@ -55,17 +54,21 @@ const yourModelSchema = new Schema({
     type: Number,
     default: 0,
   },
-  brand_id:{
-    type:Number,
-     default:0,
+  brand_id: {
+    type: Number,
+    default: 0,
   },
   created_at: {
     type: Date,
     default: () => Date.now(),
   },
-updated_at: { 
+  updated_at: {
     type: Date,
     default: () => Date.now(),
+  },
+  quantity: {
+    type: Number,
+    default: () => 0,
   },
 });
 
@@ -74,6 +77,6 @@ yourModelSchema.pre("save", function (next) {
   next();
 });
 
-const Product = mongoose.model("product_id", yourModelSchema);
+const Product = mongoose.model("product_ids", yourModelSchema);
 
 module.exports = Product;

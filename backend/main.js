@@ -9,10 +9,10 @@ let path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const cors  = require("cors");
+const cors = require("cors");
 const app = express();
 
-
+const supabase = require("./src/supabase_config/supabase_config");
 
 const name = "Alice";
 const age = 30;
@@ -29,14 +29,12 @@ const {
   productRoutes,
   categoryRoutes,
   cartRoutes,
-  brandRoutes
+  brandRoutes,
 } = require("./src/routes");
 require("./src/controller/usercontroller");
 
 // Body parser middleware
-app.use(cors(
- 
-));
+app.use(cors());
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -47,7 +45,6 @@ app.use(authRoutes);
 app.use(productRoutes);
 app.use(categoryRoutes);
 app.use(brandRoutes);
-
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 // Middleware function for logging

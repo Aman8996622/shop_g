@@ -1,3 +1,5 @@
+const supabase = require("../supabase_config/supabase_config");
+
 const multer = require("multer");
 const fs = require("fs");
 const storage = multer.diskStorage({

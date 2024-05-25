@@ -27,20 +27,15 @@ async function addToCart(req, res) {
   const brand = req.body.brand;
   const mrp = req.body.price;
   const subCategoriesId = req.body.sub_category_id;
-  const main_category_id = req.body.main_category_id;
-  let list = req.files;
+  // const main_category_id = req.body.main_category_id;
+  // const main_category_id 
 
   try {
     const product = await CartProduct.findOne({ name: productId });
     if (!product) {
       CartProduct.create({
-        name: productName, 
-      
+        name: productName,
       });
-       
-
-
- 
 
 
     } else {

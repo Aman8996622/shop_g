@@ -4,8 +4,9 @@ const Product = require("../models/new_db_models/product");
 
 const Images = require("../models/new_db_models/image");
 
-const Brand  = require("../models/new_db_models/brand");
+const Brand = require("../models/new_db_models/brand");
 
+const ProductAttribute = require("../models/new_db_models/productAttributes");
 
 const cache = require("node-cache");
 
@@ -26,46 +27,45 @@ async function addProduct(req, res) {
   const subCategoriesId = req.body.sub_category_id;
   const main_category_id = req.body.main_category_id;
   const discount = req.body.discount;
-  const brandId   = req.body.brandId;
-
-  const color  = req.body.color;
-  const size  = req.body.size;
-
+  const brandId = req.body.brand_id;
+  const attributes = req.body.attributes;
 
   let list = req.files;
 
   try {
     const product = await Product.findOne({ name: productName });
-    if(!product) {
+    if (!product) {
       let reqFileList = [];
       for (const tempObject of list) {
         console.log(tempObject);
-        
+
         reqFileList.push({
           id: productId,
           image_url: `http://localhost:4000/public/images/${tempObject.filename}`,
         });
       }
+
       console.log(reqFileList);
-      const brand  =  await Brand.findOne(
-        {id : brandId}
-      );
+      console.log("brand id ", brandId);
 
-        console.log(brand);
+      const brand = await Brand.findOne({
+        id: brandId,
+      });
 
+      console.log(brand);
 
-       const userDetials = await Product.create({
+      const userDetials = await Product.create({
         id: productId,
         name: productName,
         categoryName: categoryName,
         main_category_id: main_category_id,
-        sub_category_id: sub_category_id,
+        sub_category_id: subCategoriesId,
         description: descrip,
-        brandId : brandId,
-        color:color,
+        brandId: brand,
+
+        color: color,
         size: size,
 
-          
         mrp: mrp,
         price: mrp,
         discount: discount,
@@ -73,22 +73,31 @@ async function addProduct(req, res) {
         brandName: brand,
         isDeleted: 0,
       });
-      
+
+      if (attributes.length != 0) {
+        for (const productAttribute of attributes) {
+          ProductAttribute.create({
+            id: randomNumber.generateId(),
+            productId: productId,
+            name: productAttribute.name,
+            images: `http://localhost:4000/public/images/${tempObject.filename}`,
+          });
+        }
+      }
+
       console.log(userDetials);
 
       res.send({
         message: "Given product is add successfully",
       });
-       
 
-        Images.insertMany(reqFileList);
+      Images.insertMany(reqFileList);
     } else {
-        
+      console.log(product);
+
       res.send({
         message: "Given product is already exist",
-        
-      })
-      
+      });
     }
   } catch (error) {
     console.log(error);

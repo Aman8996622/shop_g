@@ -15,7 +15,13 @@ routes.post(
   "/add_product",
   verifyToken.verifyToken,
   setUploadPath.setUploadPath("./public/images"),
-  upload.array("productImage"),
+  setUploadPath.setUploadPath("./public/images/"),
+  // upload.array("productImage"),
+  upload.fields([
+    // { name: "CategoryImage", maxCount: 1 },
+    { name: "productImage" },
+    { name: "attributeImage"},
+  ]),
   addProduct
 );
 

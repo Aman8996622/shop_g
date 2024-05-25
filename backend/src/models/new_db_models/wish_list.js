@@ -56,6 +56,6 @@ ProductSchema.pre("save", function (next) {
   next();
 });
 
-const WishList = mongoose.model("Product", ProductSchema);
+const WishList = mongoose.model("wishlist", ProductSchema, "wishlist");
 
 module.exports = WishList;
