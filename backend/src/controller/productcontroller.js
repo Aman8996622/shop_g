@@ -36,8 +36,12 @@ async function addProduct(req, res) {
     const product = await Product.findOne({ name: productName });
     if (!product) {
       let reqFileList = [];
-      for (const tempObject of list) {
-        console.log(tempObject);
+      // console.log("imageList", list.attributeImage);
+
+      // console.log("product image ", list.productImage);
+
+      for (const tempObject of list.productImage) {
+        // console.log(tempObject);
 
         reqFileList.push({
           id: productId,
@@ -52,7 +56,7 @@ async function addProduct(req, res) {
         id: brandId,
       });
 
-      console.log(brand);
+      // console.log(brand);
 
       const userDetials = await Product.create({
         id: productId,
@@ -63,9 +67,6 @@ async function addProduct(req, res) {
         description: descrip,
         brandId: brand,
 
-        color: color,
-        size: size,
-
         mrp: mrp,
         price: mrp,
         discount: discount,
@@ -74,24 +75,66 @@ async function addProduct(req, res) {
         isDeleted: 0,
       });
 
-      if (attributes.length != 0) {
-        for (const productAttribute of attributes) {
+      const productAttribute = JSON.parse(attributes);
+      console.log("json parse object", productAttribute);
+
+      if (productAttribute.length != 0) {
+        var colorattributesList = productAttribute.filter(function (e) {
+          return e.name == "Color";
+        });
+        var storageList = productAttribute.filter(function (e) {
+          return e.name == "Storage";
+        });
+
+        storageList.map((e) => {
           ProductAttribute.create({
             id: randomNumber.generateId(),
             productId: productId,
-            name: productAttribute.name,
-            images: `http://localhost:4000/public/images/${tempObject.filename}`,
+            name: e.name,
           });
-        }
+        });
+
+        console.log("given the color list is ", colorattributesList);
+
+        colorattributesList.map((e) => {
+          var index = colorattributesList.indexOf(e);
+          console.log("index", index);
+          var colorMobileImage = list.attributeImage[index];
+
+          console.log("given color attribute object", e);
+
+          console.log(colorMobileImage);
+
+          ProductAttribute.create({
+            id: randomNumber.generateId(),
+            productId: productId,
+            name: e.name,
+            imageUrl: `http://localhost:4000/public/images/product_color/${colorMobileImage.filename}`,
+          });
+
+          console.log("given product attribute is save successfully");
+        });
+
+        // for (const productAttribute of attributes) {
+
+        //   ProductAttribute.create({
+        //     id: randomNumber.generateId(),
+        //     productId: productId,
+        //     name: productAttribute.name,
+        //     images: `http://localhost:4000/public/images/${tempObject.filename}`,
+        //   });
+
+        // }
       }
 
       console.log(userDetials);
 
+      console.log("", reqFileList);
+      Images.insertMany(reqFileList);
+
       res.send({
         message: "Given product is add successfully",
       });
-
-      Images.insertMany(reqFileList);
     } else {
       console.log(product);
 

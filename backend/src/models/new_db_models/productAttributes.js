@@ -11,10 +11,14 @@ const yourSchema = new mongoose.Schema({
   value: {
     type: String,
   },
-  images: { type: String },
+  imageUrl: { type: String },
 });
 
 // Create a model
-const Brand = mongoose.model("attributes", yourSchema, "attributes");
+const ProductAttribute = mongoose.model(
+  "attributes",
+  yourSchema,
+  "productAttribute"
+);
 
-module.exports = Brand;
+module.exports = ProductAttribute;

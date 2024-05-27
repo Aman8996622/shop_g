@@ -17,7 +17,7 @@ async function addMainCategory(req, res) {
   const categoryId = randomNumber.generateId();
   const description = req.description;
 
-  const subCategories = JSON.parse(req.body.subCate)
+  const subCategories = JSON.parse(req.body.subCate);
 
   const imageFile = req.files.CategoryImage;
 
@@ -28,16 +28,11 @@ async function addMainCategory(req, res) {
     if (!category) {
       const userDetials = await Category.create({
         id: categoryId,
-      
         name: categoryName,
         description: description,
         isDeleted: 0,
-        
       });
 
-      
-
-      
       const imageUrl = `http://localhost:4000/public/images/categories/${imageFile[0].filename}`;
 
       await Images.create({
@@ -66,24 +61,6 @@ async function addMainCategory(req, res) {
     console.log(error);
   }
 }
-
-
-// async function  addBrand({
-   
-// }){
-//     try {
-      
-//     } catch ( 
-
-//     ) {
-      
-//     }
-  
-
-
-// }
-
-
 
 /* ********************/
 // Add Sub category
@@ -130,7 +107,6 @@ async function addSubCategory({ body, subCategories, mainCategoryId, files }) {
   }
 }
 
-
 /* ********************/
 // Delete Category
 /* ********************/
@@ -170,11 +146,6 @@ async function getCategory(req, res) {
     }
   } catch (error) {}
 }
-
-
-
-
- 
 
 module.exports = {
   addMainCategory,
