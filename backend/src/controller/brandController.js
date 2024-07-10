@@ -34,8 +34,7 @@ async function addBrand(req, res) {
       await Images.create({
         id: brandId,
         images_url: imageUrl,
-      }); 
-      
+      });
 
       res.send({
         status: true,

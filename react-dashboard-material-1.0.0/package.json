@@ -1,0 +1,55 @@
+{
+  "name": "material-dashboard-react",
+  "version": "1.9.0",
+  "description": "Material Dashboard React. Coded by Creative Tim",
+  "private": false,
+  "main": "dist/index.js",
+  "homepage": "https://themewagon.github.io/react-dashboard-material",
+  "dependencies": {
+    "@material-ui/core": "4.10.0",
+    "@material-ui/icons": "4.11.3",
+    "chartist": "1.3.0",
+    "classnames": "2.5.1",
+    "history": "5.3.0",
+    "perfect-scrollbar": "1.5.5",
+    "prop-types": "15.8.1",
+    "react": "18.3.1",
+    "react-chartist": "0.14.4",
+    "react-dom": "18.3.1",
+    "react-google-maps": "9.4.5",
+    "react-router-dom": "6.24.1",
+    "react-scripts": "5.0.1",
+    "react-swipeable-views": "0.14.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+  },
+  "keywords": [],
+  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.1.3",
+    "gulp": "5.0.0",
+    "gulp-append-prepend": "1.0.9",
+    "prettier": "3.3.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": []
+  }
+}
